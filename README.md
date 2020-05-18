@@ -1,6 +1,7 @@
-# Google Student Training in Engineering Program for Mahima Shanware
+# Google Student Training in Engineering Program 
 
-This repo contains the projects you'll work on for the first half of STEP.
+Hello! I'm Mahima Shanware, a Google STEP intern for summer 2020. 
+This repo contains the projects I'll work on for the first half of STEP.
 This work is based on the [Google Software Product Sprint](https://g.co/softwareproductsprint) program.
 
 To get started:
@@ -11,4 +12,4 @@ To get started:
   - If the tutorial panel does not open or display the walkthrough contents, try refreshing the page.
 
 Then follow the on-screen instructions to set up your repo.
-Mahima Shanware
+
