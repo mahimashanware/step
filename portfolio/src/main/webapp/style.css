@@ -24,30 +24,6 @@ html {
 body {
   font-size: 1.2em;
   line-height: 1.6;
-  list-style: none;
-  width: 100%;
-  overflow: auto;
-
-}
-
-body::after {
-  background: url("images/min2.png") repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  content: "";
-  opacity: 0.1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: repeat;
-  position: absolute;
-  z-index: -1;   
-  padding: -5em;
 
 }
 
@@ -230,18 +206,22 @@ ul {
     padding-left: 0;
 }​
 
-#gallery img {
+#slideshow img {
     margin-left: auto;
 	margin-right: auto;
-	margin-top: 3em;
-	max-width: 10%;
-    max-height: 10%;
+	margin-top: 1em;
+	max-width: 500px;
 	height: auto;
 	padding:4px;
+    z-index: 100;
 }
 
-footer {
+footer p {
     padding: 2em;
+    font: 12px/1em "Overpass", "Open Sans", Helvetica, sans-serif;
+    color: #333;
+    font-weight: 300; 
+    text-align: left;
 }
 
 
