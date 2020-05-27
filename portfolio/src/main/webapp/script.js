@@ -34,3 +34,16 @@ function getRandomDataUsingArrowFunctions() {
   });
   console.log('Done.');
 }
+
+function getData() {
+  fetch('/data').then(response => response.json()).then((data) => {
+    // stats is an object, not a string, so we have to
+    // reference its fields to create HTML content
+
+    const dataListElement = document.getElementById('data-container');
+    dataListElement.innerHTML = '';
+    dataListElement.appendChild(data);
+  });
+}
+
+
