@@ -1,18 +1,51 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mahima Shanware</title>
+    <meta name="author" content="Mahima Shanware">
+    <meta name="description" content="Mahima Shanware's Personal Website">
+    <meta name="keywords" content="Mahima's Website" meta="mahima shanware, computer science, cmu, mahimashanware, github.io, mahimashanware.github.io, website, information systems, mahima, shanware, mahi">
+	<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
-  </head>
-  <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
-  </body>
+</head>
+
+<body>
+	<div id="container">
+        <div id="title">mahima.</div>
+        <div id="top_row">
+            <nav>
+                <a href="index.html" class="current">home</a>
+                <a href="blog.html">blog</a>     
+                <a href="gallery.html">gallery</a>   
+            </nav>
+        </div>
+		<div id="main"><img src="images/mahi_main.jpg" alt="Mahima"></div>
+		<div id='buttons'>
+            <a href="mailto:mahima.shanware@gmail.com"><img src="images/mail.jpeg" alt="Mahima"></a>
+            <a href="https://www.linkedin.com/in/mshanware539"><img src="images/li.jpeg" alt="Mahima"></a>
+            <a href="https://www.github.com/mahimashanware"><img src="images/github.jpeg" alt="Mahima"></a>
+		</div>
+        <div id="text1">Hi! I'm Mahima Shanware, a rising junior at <a href="cmu.edu">Carnegie Mellon University</a> studying Information Systems and Computer Science.</div>
+        <div id="text1">Here are some projects I've worked on in the past...
+            <ol>
+            <li>A machine-learning powered stroke prediction tool that uses typing as an indicator of affected motor activity</li>
+            <li>A enterprise HR system designed with Ruby on Rails</li>
+            <li>A machine learning tool that uses Twitter's API to find the most hated political candidates by state</li>
+            </ol>
+        </div>
+        <div id="text1">Random Facts<br>Click here to see a random fact:<br>
+            <button onclick="getRandomDataUsingArrowFunctions()">Fetch a fact!</button>
+            <div id="data-container"></div>
+        </div>
+	</div>
+</body>
+
+<footer>
+    <p>Made by Mahima Shanware as part of the Google STEP training.</p>
+</footer>
+
 </html>
