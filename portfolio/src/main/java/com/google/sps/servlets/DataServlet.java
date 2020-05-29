@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.sps.data.DataComment;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -21,26 +22,36 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
-import java.util.*;
+import com.google.sps.data.DataComment;
+import java.io.*;
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
-    private ArrayList<String> object = new ArrayList<String>(); 
+    private DataComment comment = new DataComment(); 
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    object.add("one");
-    object.add("two");
-    String json = convertToJson(object);
-    response.setContentType("application/json;");
+    String json = new Gson().toJson(comment);
+    response.setContentType("application/json");
     response.getWriter().println(json);
   }
 
-  private String convertToJson(ArrayList object) {
-    Gson gson = new Gson();
-    String json = gson.toJson(object);
-    return json;
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // If the user sends another POST request after the comment is made, then start a new comment.
+
+    // Get the input from the form and mark comment as being made.
+    String text = getText(request);
+    comment.makeComment(text);
+
+    // Redirect back to the HTML page.
+    response.sendRedirect("/index.html");
+  }
+
+  private String getText(HttpServletRequest request) {
+    // Get the input from the form.
+    String text = request.getParameter("user-comment");
+    return text;
   }
 }

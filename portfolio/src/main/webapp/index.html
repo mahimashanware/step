@@ -37,9 +37,19 @@
             <li>A machine learning tool that uses Twitter's API to find the most hated political candidates by state</li>
             </ol>
         </div>
-        <div id="text1">Random Facts<br>Click here to see a random fact:<br>
-            <button onclick="getData()">Fetch a fact!</button>
-            <div id="data-container"></div>
+        <div onload="getComment()">
+            <p>Comments<p>
+
+            <ul id="comment-container"></ul>
+
+            <form action="/data" method="POST">
+
+            <p>Comment:</p>
+            <input type="text" name="user-comment">
+            <br/><br/>
+
+            <input type="submit"/>
+            </form>
         </div>
         <div><a href="/data">data</a></div>
 	</div>
