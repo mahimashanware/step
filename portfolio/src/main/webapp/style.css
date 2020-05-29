@@ -6,12 +6,6 @@
     
 }
 
-#greeting-container {
-  margin-top: 20px;
-}
-
-
-
 @import url('https://fonts.googleapis.com/css?family=Lato|Oswald|Roboto&display=swap');
 
 *, *:before, *:after {
@@ -160,6 +154,13 @@ h1 {
 	font-family: 'Oswald', sans-serif;
 	color: #484848;
 	font-size: 3em;
+	margin-bottom: -10px;
+}
+
+#header {
+	font-family: 'Oswald', sans-serif;
+	color: #484848;
+	font-size: 1em;
 	margin-bottom: -10px;
 }
 

@@ -16,13 +16,6 @@
 <body>
 	<div id="container">
         <div id="title">mahima.</div>
-        <div id="top_row">
-            <nav>
-                <a href="index.html" class="current">home</a>
-                <a href="blog.html">blog</a>     
-                <a href="gallery.html">gallery</a>   
-            </nav>
-        </div>
 		<div id="main"><img src="images/mahi_main.jpg" alt="Mahima"></div>
 		<div id='buttons'>
             <a href="mailto:mahima.shanware@gmail.com"><img src="images/mail.jpeg" alt="Mahima"></a>
@@ -37,14 +30,16 @@
             <li>A machine learning tool that uses Twitter's API to find the most hated political candidates by state</li>
             </ol>
         </div>
+        <div id="text1">Here are some pictures of me & stuff I like to do!</div>
+        <div id="main">enter images here</div>
         <div onload="getComment()">
-            <p>Comments<p>
+            <div id="text1">Comment Section
 
             <ul id="comment-container"></ul>
 
             <form action="/data" method="POST">
 
-            <label>Comment:</label>
+            <label><em>Comment:</em></label>
             <input type="text" name="user-comment">
             <br/><br/>
 
@@ -54,8 +49,8 @@
 
             <input type="submit"/>
             </form>
+            </div>
         </div>
-        <div><a href="/data">data</a></div>
 	</div>
 </body>
 
