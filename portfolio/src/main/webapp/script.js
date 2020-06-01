@@ -39,6 +39,8 @@ function getData() {
   fetch('/data').then(response => response.json()).then((data) => {
     // datas is an object, not a string, so we have to
     // reference its fields to create HTML content
+    console.log(data.author);
+    console.log(data.text);
 
     const dataListElement = document.getElementById('data-container');
     dataListElement.innerHTML = '';
