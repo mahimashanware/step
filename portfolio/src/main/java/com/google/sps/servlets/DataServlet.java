@@ -56,15 +56,15 @@ public final class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    UserService userService = UserServiceFactory.getUserService();
     Query query = new Query("Comment").addSort("text", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    ArrayList<String> allComments = new ArrayList<>();
+    List<DataComment> allComments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String text = (String) entity.getProperty("text");
+      DataComment comment = new DataComment(text);
       allComments.add(text);
     }
 
