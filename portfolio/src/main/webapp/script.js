@@ -34,3 +34,26 @@ function getRandomDataUsingArrowFunctions() {
   });
   console.log('Done.');
 }
+
+function getData() {
+  fetch('/data').then(response => response.json()).then((data) => {
+    // datas is an object, not a string, so we have to
+    // reference its fields to create HTML content
+    console.log(data.author);
+    console.log(data.text);
+
+    const dataListElement = document.getElementById('data-container');
+    dataListElement.innerHTML = '';
+    dataListElement.appendChild(
+        createListElement('Author: ' + data.author));
+    dataListElement.appendChild(
+        createListElement('Comment: ' + data.text));
+  });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
+}
