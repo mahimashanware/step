@@ -7,10 +7,10 @@ import java.util.List;
 /** Class containing server statistics. */
 public class DataComment {
 
-  private final List<String> comments = new ArrayList<>();
+  private final String comment;
 
-  public void addComment(String text) {
-      comments.add(text);
+  public DataComment(String comment) {
+    this.comment = comment;
   }
 
 }
