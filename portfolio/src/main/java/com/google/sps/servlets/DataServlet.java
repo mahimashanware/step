@@ -64,8 +64,8 @@ public final class DataServlet extends HttpServlet {
     List<DataComment> allComments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String text = (String) entity.getProperty("text");
-      DataComment comment = new DataComment(text);
-      allComments.add(text);
+      DataComment newComment = new DataComment(text);
+      allComments.add(newComment);
     }
 
     response.setContentType("application/json;");

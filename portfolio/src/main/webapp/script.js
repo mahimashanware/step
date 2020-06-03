@@ -13,11 +13,15 @@
 // limitations under the License.
 
 function getComments() {
+  console.log("Entered getComments");
   fetch('/data').then(response => response.json()).then((data) => {
+    console.log(data);
     const commentHistoryEl = document.getElementById('comment-container');
-    data.comments.forEach((line) => {
-      commentHistoryEl.appendChild(createListElement(line));
-    });
+    if (!Array.isArray(data.comments) || !data.comments.length) {
+        data.comments.forEach((line) => {
+        commentHistoryEl.appendChild(createListElement(line));
+        });
+    }
   });
 }
 
