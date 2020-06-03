@@ -45,6 +45,7 @@ public final class DataServlet extends HttpServlet {
     String text = request.getParameter("new-comment");
     comments.add(text);
 
+    // Store comments in datastore
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("text", text);
