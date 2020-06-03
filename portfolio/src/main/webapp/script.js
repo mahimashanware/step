@@ -12,42 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/**
- * Adds a random greeting to the page.
- */
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
-}
-
-function getRandomDataUsingArrowFunctions() {
-  console.log('Fetching a random fact.');
-  fetch('/data').then(response => response.text()).then((data) => {
-    document.getElementById('data-container').innerText = data;
-  });
-  console.log('Done.');
-}
-
-function getData() {
+function getComments() {
   fetch('/data').then(response => response.json()).then((data) => {
-    // datas is an object, not a string, so we have to
-    // reference its fields to create HTML content
-    console.log(data.author);
-    console.log(data.text);
-
-    const dataListElement = document.getElementById('data-container');
-    dataListElement.innerHTML = '';
-    dataListElement.appendChild(
-        createListElement('Author: ' + data.author));
-    dataListElement.appendChild(
-        createListElement('Comment: ' + data.text));
+    const commentHistoryEl = document.getElementById('comment-container');
+    data.comments.forEach((line) => {
+      commentHistoryEl.appendChild(createListElement(line));
+    });
   });
 }
 

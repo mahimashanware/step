@@ -27,20 +27,29 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
-  private DataComment data;
+  private DataComment data = new DataComment();
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    DataComment object = new DataComment("mahima", "hello");
-    String json = convertToJson(object);
-
-    response.setContentType("text/html;");
+    response.setContentType("application/json");
+    String json = new Gson().toJson(data);
     response.getWriter().println(json);
   }
 
-  private String convertToJson(DataComment data) {
-    Gson gson = new Gson();
-    String json = gson.toJson(data);
-    return json;
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getComment(request);
+
+    data.addComment(text);
+
+    // Redirect back to the HTML page.
+    response.sendRedirect("/index.html");
+  }
+
+  private String getComment(HttpServletRequest request) {
+    // Get the input from the form.
+    String comment = request.getParameter("new-comment");
+    return comment;
   }
 }
