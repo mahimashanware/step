@@ -29,7 +29,7 @@
             <a href="https://www.linkedin.com/in/mshanware539"><img src="images/li.jpeg" alt="Mahima"></a>
             <a href="https://www.github.com/mahimashanware"><img src="images/github.jpeg" alt="Mahima"></a>
 		</div>
-        <div id="text1">Hi! I'm Mahima Shanware, a rising junior at <a href="cmu.edu">Carnegie Mellon University</a> studying Information Systems and Computer Science.</div>
+        <div id="text1">Hi! I'm Mahima Shanware, a rising junior at <a href="https://www.cmu.edu">Carnegie Mellon University</a> studying Information Systems and Computer Science.</div>
         <div id="text1">Here are some projects I've worked on in the past...
             <ol>
             <li>A machine-learning powered stroke prediction tool that uses typing as an indicator of affected motor activity</li>
@@ -38,7 +38,7 @@
             </ol>
         </div>
 
-        <div id="text1"><p>Comment section:</p>
+        <div id="text1" onload="getComments()"><p>Comment section:</p>
 
         <ul id="comment-container"></ul>
 
@@ -48,9 +48,7 @@
         <input type="text" name="new-comment">
         <br/><br/>
 
-        <script>
-            getComments();
-        </script>
+        <script>getComments();</script>
 
         <input type="submit">
         </form></div>
