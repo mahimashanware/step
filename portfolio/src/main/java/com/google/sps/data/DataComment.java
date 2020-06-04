@@ -1,17 +1,16 @@
 
 package com.google.sps.data;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Class containing server statistics. */
-public final class DataComment {
+public class DataComment {
 
-  private final String author;
-  private final String text;
+  private final List<String> comments = new ArrayList<>();
 
-  public DataComment(String author, String text) {
-    this.author = author;
-    this.text = text;
+  public void addComment(String text) {
+      comments.add(text);
   }
 
 }
