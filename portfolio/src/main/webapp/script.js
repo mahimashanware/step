@@ -26,13 +26,16 @@ function getComments() {
 /** Creates an <li> element containing text. */
 function createListElement(text) {
   const liElement = document.createElement('li');
-  liElement.innerHTML = text;
+  liElement.innerHTML = "- " + text;
   return liElement;
 }
 
 var map;
 function initMap() {
-    const map = new google.maps.Map(
-        document.getElementById('map'),
-        {center: {lat: 37.422, lng: -122.084}, zoom: 16});
+  var map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: 40.4427, lng: -79.9430 },
+    zoom: 18,
+    mapTypeId: "satellite"
+  });
+  map.setTilt(45);
 }
