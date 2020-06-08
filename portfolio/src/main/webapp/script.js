@@ -34,8 +34,14 @@ var map;
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 40.4427, lng: -79.9430 },
-    zoom: 18,
+    zoom: 16,
     mapTypeId: "satellite"
   });
   map.setTilt(45);
+
+  const trexMarker = new google.maps.Marker({
+    position: {lat: 40.4431, lng: -79.9447},
+    map: map,
+    title: 'Gates School of Computer Science'
+  });
 }
