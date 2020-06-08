@@ -1,13 +1,7 @@
-
 #top_row {
     margin: auto;
     width: 50%;
-    text-align: center;
-    
-}
-
-#greeting-container {
-  margin-top: 20px;
+    text-align: center;    
 }
 
 #map {
@@ -15,98 +9,108 @@
     width: 100%;
 }
 
-
-
 @import url('https://fonts.googleapis.com/css?family=Lato|Oswald|Roboto&display=swap');
 
 *, *:before, *:after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
-html {
-  font-size: 18px;
-  list-style: none;
-}
-body {
-  font-size: 1.2em;
-  line-height: 1.6;
 
+html {
+    font-size: 18px;
+    list-style: none;
+}
+
+body {
+    font-size: 1.2em;
+    line-height: 1.6;
 }
 
 label .menu {
-  position: absolute;
-  right: -100px;
-  top: -100px;
-  z-index: 100;
-  width: 200px;
-  height: 200px;
-  background: #fff;
-  border-radius: 50% 50% 50% 50%;
-  transition: 0.5s ease-in-out;
-  box-shadow: 0 0 0 0 #fff, 0 0 0 0 #fff;
-  cursor: pointer;
+    position: absolute;
+    right: -100px;
+    top: -100px;
+    z-index: 100;
+    width: 200px;
+    height: 200px;
+    background: #fff;
+    border-radius: 50% 50% 50% 50%;
+    transition: 0.5s ease-in-out;
+    box-shadow: 0 0 0 0 #fff, 0 0 0 0 #fff;
+    cursor: pointer;
 }
+
 label .hamburger {
-  position: absolute;
-  top: 135px;
-  left: 50px;
-  width: 30px;
-  height: 2px;
-  background: #484848;
-  display: block;
-  transform-origin: center;
-  transition: 0.5s ease-in-out;
+    position: absolute;
+    top: 135px;
+    left: 50px;
+    width: 30px;
+    height: 2px;
+    background: #484848;
+    display: block;
+    transform-origin: center;
+    transition: 0.5s ease-in-out;
 }
+
 label .hamburger:after, label .hamburger:before {
-  transition: 0.5s ease-in-out;
-  content: "";
-  position: absolute;
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #484848;
+    transition: 0.5s ease-in-out;
+    content: "";
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: #484848;
 }
+
 label .hamburger:before {
-  top: -10px;
+    top: -10px;
 }
+
 label .hamburger:after {
-  bottom: -10px;
+    bottom: -10px;
 }
+
 label input {
-  display: none;
+    display: none;
 }
+
 label input:checked + .menu {
-  box-shadow: 0 0 0 100vw #fff, 0 0 0 100vh #fff;
-  border-radius: 0;
+    box-shadow: 0 0 0 100vw #fff, 0 0 0 100vh #fff;
+    border-radius: 0;
 }
+
 label input:checked + .menu .hamburger {
-  transform: rotate(45deg);
+    transform: rotate(45deg);
 }
+
 label input:checked + .menu .hamburger:after {
-  transform: rotate(90deg);
-  bottom: 0;
+    transform: rotate(90deg);
+    bottom: 0;
 }
+
 label input:checked + .menu .hamburger:before {
-  transform: rotate(90deg);
-  top: 0;
+    transform: rotate(90deg);
+    top: 0;
 }
+
 label input:checked + .menu + ul {
-  opacity: 1;
+    opacity: 1;
 }
+
 label ul {
-  z-index: 200;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: 0.25s 0s ease-in-out;
+    z-index: 200;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: 0.25s 0s ease-in-out;
 }
 
 label a {
-  margin-bottom: 1em;
-  display: block;
-  color: #484848;
-  text-decoration: none;
+    margin-bottom: 1em;
+    display: block;
+    color: #484848;
+    text-decoration: none;
 }
 
 label a:hover {
@@ -114,37 +118,38 @@ label a:hover {
 }
 
 #top_row a {
-  margin-bottom: 1em;
-  color: #484848;
-  padding: 10px 10px 10px 10px;
-  word-wrap: normal;
-  text-decoration: none;
+    margin-bottom: 1em;
+    color: #484848;
+    padding: 10px 10px 10px 10px;
+    word-wrap: normal;
+    text-decoration: none;
 }
+
 #top_row a:hover {
     color: #cce6ff;
 }
 
 #top_row a.current {
-  border-bottom: 2px solid currentColor;
+    -bottom: 2px solid currentColor;
 }
 
 h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 80%;
-  text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    text-align: center;
 }
 
 #container {
-	font-family: 'Open Sans', sans-serif;
-	position: relative;
-	text-align: center;
-	display: block;
-	justify-content: center;
-	margin-left: auto;
-	margin-right: auto;
+    font-family: 'Open Sans', sans-serif;
+    position: relative;
+    text-align: center;
+    display: block;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
     width: 50%;
     overflow: auto;
 }
@@ -169,16 +174,16 @@ h1 {
 }
 
 #text {
-	  font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
-	  color: #333;
-	  font-weight: 300; 
+    font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+    color: #333;
+    font-weight: 300; 
 
 }
 #text1 {
-	  font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
-	  color: #333;
-	  font-weight: 300; 
-      text-align: left;
+    font: 16px/1.5em "Overpass", "Open Sans", Helvetica, sans-serif;
+    color: #333;
+    font-weight: 300; 
+    text-align: left;
 
 }
 
