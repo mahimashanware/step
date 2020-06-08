@@ -39,9 +39,13 @@ function initMap() {
   });
   map.setTilt(45);
 
-  const trexMarker = new google.maps.Marker({
+  const cmuMarker = new google.maps.Marker({
     position: {lat: 40.4431, lng: -79.9447},
     map: map,
     title: 'Gates School of Computer Science'
   });
+
+  const cmuInfoWindow =
+      new google.maps.InfoWindow({content: 'You can find me here often, at the Gates School of Computer Science!'});
+  cmuInfoWindow.open(map, cmuMarker);
 }
