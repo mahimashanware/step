@@ -10,6 +10,11 @@
   margin-top: 20px;
 }
 
+#map {
+    height: 400px;
+    width: 100%;
+}
+
 
 
 @import url('https://fonts.googleapis.com/css?family=Lato|Oswald|Roboto&display=swap');
