@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// retrieve comments and show comment text on page
 async function getComments() {
     var servletURL = "/data";
     var maxComments = document.getElementById("max-comments").value;
@@ -28,6 +29,7 @@ async function getComments() {
     });
 }
 
+// delete all comments
 var response;
 async function deleteComments() {
     var servletURL = "/delete-data";
@@ -44,6 +46,7 @@ function createListElement(text) {
   return liElement;
 }
 
+// show terrain map of CMU with Gates building marker and info window on screen using google maps API
 var map;
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
