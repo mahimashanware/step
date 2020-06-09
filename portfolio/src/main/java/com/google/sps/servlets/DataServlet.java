@@ -37,13 +37,12 @@ import com.google.appengine.api.users.UserServiceFactory;
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
-  private ArrayList<String> comments = new ArrayList<>(); 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private int maxComments = 10;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("new-comment");
-    comments.add(text);
 
     // Store comments in datastore
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -61,15 +60,24 @@ public final class DataServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
-    List<DataComment> allComments = new ArrayList<>();
+    int numComment = 0;
+    if (request.getParameter("max-comments") != null) {
+        String maxCommentsString = request.getParameter("max-comments");
+        maxComments = Integer.parseInt(maxCommentsString);
+    }
+
+    List<DataComment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String text = (String) entity.getProperty("text");
-      DataComment newComment = new DataComment(text);
-      allComments.add(newComment);
+      DataComment currComment = new DataComment(text);
+      if (numComment < maxComments) {
+        comments.add(currComment);
+        numComment++; 
+      }
     }
 
     response.setContentType("application/json;");
-    String json = new Gson().toJson(allComments);
+    String json = new Gson().toJson(comments);
     response.getWriter().println(json);
   }
 
