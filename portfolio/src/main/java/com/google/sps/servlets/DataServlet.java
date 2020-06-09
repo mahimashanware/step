@@ -33,7 +33,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 
-/** Servlet responsible for creating new comments. */
+/** Servlet responsible for creating new comments and returning all comments. Max number of comments can be set by user. */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 

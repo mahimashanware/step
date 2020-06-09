@@ -13,7 +13,7 @@
 // limitations under the License.
 
 async function getComments() {
-    var servletURL = "/data"
+    var servletURL = "/data";
     var maxComments = document.getElementById("max-comments").value;
     if (maxComments != null && maxComments >= 1) {
         servletURL = `/data?max-comments=${maxComments}`;
@@ -26,6 +26,15 @@ async function getComments() {
 		const content = `${comment.comment}`;
 		commentsList.appendChild(createListElement(content));
     });
+}
+
+var response;
+async function deleteComments() {
+    var servletURL = "/delete-data";
+    const response = await fetch(servletURL, {
+        method: "POST"
+    });
+    await getComments();
 }
 
 /** Creates an <li> element containing text. */
