@@ -12,15 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-function getComments() {
-  fetch('/data').then(response => response.json()).then((data) => {
-    const commentHistoryEl = document.getElementById('comment-container');
-    if (!Array.isArray(data.comments) || !data.comments.length) {
-        data.forEach((line) => {
-        commentHistoryEl.appendChild(createListElement(line.comment));
-        });
-    }
-  });
+async function getComments() {
+    const servletURL = `/data?max-comments=5`;
+    const response = await fetch(servletURL);
+    const comments = await response.json();
+	const commentsList = document.getElementById('comment-container');
+	commentsList.innerHTML = '';
+	comments.forEach(comment => {
+		const content = `${comment.comment}`;
+		commentsList.appendChild(createListElement(content));
+    });
 }
 
 /** Creates an <li> element containing text. */
