@@ -38,8 +38,7 @@ import com.google.appengine.api.users.UserServiceFactory;
 public final class DataServlet extends HttpServlet {
 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-  private int maxComments = 10;
-
+  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("new-comment");
@@ -61,7 +60,6 @@ public final class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     int numComment = 0;
-    // parse max number of comments from user input
     if (request.getParameter("max-comments") != null) {
         String maxCommentsString = request.getParameter("max-comments");
         maxComments = Integer.parseInt(maxCommentsString);

@@ -30,7 +30,6 @@ async function getComments() {
 }
 
 // delete all comments
-var response;
 async function deleteComments() {
     var servletURL = "/delete-data";
     const response = await fetch(servletURL, {
@@ -47,7 +46,6 @@ function createListElement(text) {
 }
 
 // show terrain map of CMU with Gates building marker and info window on screen using google maps API
-var map;
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 40.4427, lng: -79.9430 },
