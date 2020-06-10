@@ -7,7 +7,7 @@
     <title>Mahima Shanware</title>
     <meta name="author" content="Mahima Shanware">
     <meta name="description" content="Mahima Shanware's Personal Website">
-    <meta name="keywords" content="Mahima's Website" meta="mahima shanware, computer science, cmu, mahimashanware, github.io, mahimashanware.github.io, website, information systems, mahima, shanware, mahi">
+    <meta name="keywords" content="Mahima's Website" meta="mahima shanware, computer science, cmu, mahimashanware, website, information systems, mahima, shanware, mahi">
 	<link href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="style.css">
     <script src="script.js"></script>
@@ -38,19 +38,22 @@
             </ol>
         </div>
 
+        <div id="text1">
+            This is where Carnegie Mellon is located.<br>
+            <div id="map">
+                <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAY8AfYUVE7iabUv7lIwxrSVRRlQo12pEI&callback=initMap"
+                type="text/javascript"></script>
+            </div>
+        </div>
+
         <div id="text1" onload="getComments()"><p>Comment section:</p>
-
         <ul id="comment-container"></ul>
-
         <form action="/data" method="POST">
-
-        <p>New comment:</p>
-        <input type="text" name="new-comment">
-        <br/><br/>
-
-        <script>getComments();</script>
-
-        <input type="submit">
+            <p>New comment:</p>
+            <input type="text" name="new-comment">
+            <br/><br/>
+            <script>getComments();</script>
+            <input type="submit">
         </form></div>
 	</div>
 </body>
