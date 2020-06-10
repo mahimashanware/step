@@ -74,6 +74,9 @@ public final class DataServlet extends HttpServlet {
         comments.add(currComment);
         numComment++; 
       }
+      else {
+          break;
+      }
     }
 
     response.setContentType("application/json;");
