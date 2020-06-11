@@ -47,14 +47,15 @@
         </div>
 
         <div id="text1" onload="getComments()"><p>Comment section:</p>
-        <ul id="comment-container"></ul>
-        <form action="/data" method="POST">
+        <form id="comment-form" action="/data" method="POST">
+            <ul id="comment-container"></ul>
             <p>New comment:</p>
             <input type="text" name="new-comment">
             <br/><br/>
             <script>getComments();</script>
             <input type="submit">
         </form></div>
+        <script>showCommentsForm();</script>
 	</div>
 </body>
 

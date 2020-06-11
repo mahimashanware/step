@@ -50,3 +50,23 @@ function initMap() {
       new google.maps.InfoWindow({content: 'You can find me here often, at the Gates School of Computer Science!'});
   cmuInfoWindow.open(map, cmuMarker);
 }
+
+// Shows of hides the comments form based on the user's login status.
+ async function showCommentsForm() {
+    const commentForm = document.getElementById("comment-form");
+    commentForm.hidden = true;
+
+    const logInResponse = await fetch("/login");
+    const loggedIn = logInResponse.headers.get("logIn");
+
+    if (loggedIn == "true") {
+        commentForm.hidden = false;
+    } 
+    
+    else if (loggedIn == "false") {
+        const loginLinkHTML = await logInResponse.text();
+        commentForm.innerHTML = "";
+        commentForm.innerHTML = loginLinkHTML;
+        commentForm.hidden = false;
+    }
+}
