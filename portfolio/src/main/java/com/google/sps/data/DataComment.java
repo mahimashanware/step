@@ -8,9 +8,15 @@ import java.util.List;
 public class DataComment {
 
   public final String comment;
+  public final String email;
 
-  public DataComment(String comment) {
+  public DataComment(String comment, String email) {
     this.comment = comment;
+    this.email = email;
+  }
+
+  public String getEmail() {
+        return this.email;
   }
 
 }

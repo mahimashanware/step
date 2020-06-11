@@ -38,16 +38,19 @@ import com.google.appengine.api.users.UserServiceFactory;
 public final class DataServlet extends HttpServlet {
 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+  private UserService userService = UserServiceFactory.getUserService();
   private int maxComments = 10;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("new-comment");
+    String email = userService.getCurrentUser().getEmail();
 
     // Store comments in datastore
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("text", text);
+    commentEntity.setProperty("email", email);
     datastore.put(commentEntity);
 
     response.sendRedirect("/index.html");
@@ -70,7 +73,8 @@ public final class DataServlet extends HttpServlet {
     List<DataComment> comments = new ArrayList<>();
     for (Entity entity : results.asIterable()) {
       String text = (String) entity.getProperty("text");
-      DataComment currComment = new DataComment(text);
+      String email = (String) entity.getProperty("email");
+      DataComment currComment = new DataComment(text, email);
       if (numComment < maxComments) {
         comments.add(currComment);
         numComment++; 

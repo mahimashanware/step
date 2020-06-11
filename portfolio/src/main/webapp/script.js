@@ -19,7 +19,7 @@ async function getComments() {
 	const commentsList = document.getElementById('comment-container');
 	commentsList.innerHTML = '';
 	comments.forEach(comment => {
-		const content = `${comment.comment}`;
+		const content = `[${comment.email}] ${comment.comment}`;
 		commentsList.appendChild(createListElement(content));
     });
 }
@@ -57,13 +57,14 @@ function initMap() {
     commentForm.hidden = true;
 
     const logInResponse = await fetch("/login");
-    const loggedIn = logInResponse.headers.get("logIn");
+    const logIn = logInResponse.headers.get("logIn");
+    console.log(logIn);
 
-    if (loggedIn == "true") {
+    if (logIn == "true") {
         commentForm.hidden = false;
     } 
     
-    else if (loggedIn == "false") {
+    else if (logIn == "false") {
         const loginLinkHTML = await logInResponse.text();
         commentForm.innerHTML = "";
         commentForm.innerHTML = loginLinkHTML;
