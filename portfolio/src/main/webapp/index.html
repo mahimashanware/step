@@ -46,14 +46,17 @@
             </div>
         </div>
 
-        <div id="text1" onload="getComments()"><p>Comment section:</p>
+        <div id="text1"><p>Comment section:</p>
         <ul id="comment-container"></ul>
         <form action="/data" method="POST">
+            <p>Max comments:</p>
+            <input type="number" id="max-comments" name="max-comments" min="1" onchange="getComments();" placeholder="20">
             <p>New comment:</p>
             <input type="text" name="new-comment">
             <br/><br/>
             <script>getComments();</script>
-            <input type="submit">
+            <input type="submit"><br><br>
+            <input type="submit" value="Delete All Comments" onclick="deleteComments();">
         </form></div>
 	</div>
 </body>
