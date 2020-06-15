@@ -12,16 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// retrieve comments and show comment text on page
 async function getComments() {
-    const servletURL = `/data?max-comments=5`;
+    var servletURL = "/data";
+    var maxComments = document.getElementById("max-comments").value;
+    if (maxComments != null && maxComments >= 1) {
+        servletURL = `/data?max-comments=${maxComments}`;
+    }
+
     const response = await fetch(servletURL);
     const comments = await response.json();
 	const commentsList = document.getElementById('comment-container');
 	commentsList.innerHTML = '';
 	comments.forEach(comment => {
+
 		const content = `[${comment.email}] ${comment.comment}`;
 		commentsList.appendChild(createListElement(content));
     });
+		const content = `${comment.comment}`;
+		commentsList.appendChild(createListElement(content));
+    });
+}
+
+// delete all comments
+async function deleteComments() {
+    var servletURL = "/delete-data";
+    const response = await fetch(servletURL, {
+        method: "POST"
+    });
+    await getComments();
 }
 
 /** Creates an <li> element containing text. */
@@ -31,7 +50,7 @@ function createListElement(text) {
   return liElement;
 }
 
-var map;
+// show terrain map of CMU with Gates building marker and info window on screen using google maps API
 function initMap() {
   var map = new google.maps.Map(document.getElementById("map"), {
     center: { lat: 40.4427, lng: -79.9430 },

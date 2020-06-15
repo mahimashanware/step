@@ -33,7 +33,7 @@ import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 
 
-/** Servlet responsible for creating new comments. */
+/** Servlet responsible for creating new comments and returning all comments. Max number of comments can be set by user. */
 @WebServlet("/data")
 public final class DataServlet extends HttpServlet {
 
@@ -45,6 +45,7 @@ public final class DataServlet extends HttpServlet {
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String text = request.getParameter("new-comment");
     String email = userService.getCurrentUser().getEmail();
+
 
     // Store comments in datastore
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -64,7 +65,6 @@ public final class DataServlet extends HttpServlet {
     PreparedQuery results = datastore.prepare(query);
 
     int numComment = 0;
-
     if (request.getParameter("max-comments") != null) {
         String maxCommentsString = request.getParameter("max-comments");
         maxComments = Integer.parseInt(maxCommentsString);
@@ -75,10 +75,15 @@ public final class DataServlet extends HttpServlet {
       String text = (String) entity.getProperty("text");
       String email = (String) entity.getProperty("email");
       DataComment currComment = new DataComment(text, email);
+
       if (numComment < maxComments) {
         comments.add(currComment);
         numComment++; 
       }
+      else {
+          break;
+      }
+
     }
 
     response.setContentType("application/json;");
