@@ -34,7 +34,37 @@ public final class FindMeetingQuery {
     else if (duration > TimeRange.WHOLE_DAY.duration()) {
         return slots;
     }
+    else {
+        int eventTimeStart = TimeRange.START_OF_DAY;
+        int eventTimeEnd = TimeRange.START_OF_DAY;
+        int latestEventEnd = TimeRange.START_OF_DAY;
+        int start = TimeRange.START_OF_DAY;
+        int end = TimeRange.END_OF_DAY;
 
-    return slots;
-  }
+        for (Event event : events) {
+            eventTimeStart = event.getWhen().start();
+            eventTimeEnd = event.getWhen().end();
+            if (start == eventTimeStart && end == eventTimeEnd) {
+                return slots;
+            }
+            else if (eventTimeStart == start && eventTimeEnd < end) {
+                start = eventTimeEnd;
+            }
+            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd == end) {
+                slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
+                return slots;
+            }
+            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd < end) {
+                slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
+                start = eventTimeEnd;
+            }
+            latestEventEnd = Math.max(latestEventEnd, eventTimeEnd);
+
+        }
+        if (end - latestEventEnd >= duration) {
+            slots.add(TimeRange.fromStartEnd(eventTimeEnd, end, true));
+        }
+        return slots;
+    }
+    }
 }
