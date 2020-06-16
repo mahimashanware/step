@@ -64,7 +64,7 @@ public final class FindMeetingQuery {
             else if (eventTimeStart == start && eventTimeEnd < end) {
                 start = eventTimeEnd;
             }
-            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd == end) {
+            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd >= end) {
                 slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
                 return slots;
             }
