@@ -19,6 +19,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
@@ -40,11 +41,24 @@ public final class FindMeetingQuery {
         int latestEventEnd = TimeRange.START_OF_DAY;
         int start = TimeRange.START_OF_DAY;
         int end = TimeRange.END_OF_DAY;
+        Boolean conflictingAttendees = false;
+
 
         for (Event event : events) {
             eventTimeStart = event.getWhen().start();
             eventTimeEnd = event.getWhen().end();
-            if (start == eventTimeStart && end == eventTimeEnd) {
+            Set<String> eventAttendees = event.getAttendees();
+            conflictingAttendees = false;
+            for (String attendee : attendees) {
+                if (eventAttendees.contains(attendee)) {
+                    conflictingAttendees = true;
+                    break;
+                }
+            }
+            if (conflictingAttendees == false) {
+                continue;
+            }
+            else if (start == eventTimeStart && end == eventTimeEnd) {
                 return slots;
             }
             else if (eventTimeStart == start && eventTimeEnd < end) {
@@ -61,8 +75,11 @@ public final class FindMeetingQuery {
             latestEventEnd = Math.max(latestEventEnd, eventTimeEnd);
 
         }
-        if (end - latestEventEnd >= duration) {
+        if (end - latestEventEnd >= duration && conflictingAttendees == true) {
             slots.add(TimeRange.fromStartEnd(eventTimeEnd, end, true));
+        }
+        else if (end - latestEventEnd >= duration && conflictingAttendees == false) {
+            slots.add(TimeRange.fromStartEnd(start, end, true));
         }
         return slots;
     }
