@@ -76,7 +76,7 @@ public final class FindMeetingQuery {
 
         }
         if (end - latestEventEnd >= duration && conflictingAttendees == true) {
-            slots.add(TimeRange.fromStartEnd(eventTimeEnd, end, true));
+            slots.add(TimeRange.fromStartEnd(latestEventEnd, end, true));
         }
         else if (end - latestEventEnd >= duration && conflictingAttendees == false) {
             slots.add(TimeRange.fromStartEnd(start, end, true));
