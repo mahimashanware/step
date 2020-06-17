@@ -39,7 +39,6 @@ public final class DataServlet extends HttpServlet {
 
   DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
   private UserService userService = UserServiceFactory.getUserService();
-  private int maxComments = 10;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
