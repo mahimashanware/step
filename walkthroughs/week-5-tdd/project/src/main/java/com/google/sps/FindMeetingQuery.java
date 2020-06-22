@@ -22,66 +22,87 @@ import java.util.List;
 import java.util.Set;
 
 public final class FindMeetingQuery {
-  public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    Collection<String> attendees = request.getAttendees();
-    int attendeeNumber = attendees.size();
-    ArrayList<TimeRange> slots = new ArrayList<TimeRange>();
-    long duration = request.getDuration();
+    public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
+        Collection<String> mandatoryAttendees = request.getAttendees();
+        Collection<String> allAttendees = request.getAllAttendees();
+        long duration = request.getDuration();
 
-    if (attendeeNumber == 0) {
-        slots.add(TimeRange.WHOLE_DAY);
-        return slots;
+        Collection<Event> mandatoryAttendeeEvents = getEventsForAttendees(mandatoryAttendees, events);
+        ArrayList<TimeRange> mandatoryAttendeesSlots = getPossibleSlots(mandatoryAttendeeEvents, mandatoryAttendees, duration);
+
+        Collection<Event> allAttendeeEvents = getEventsForAttendees(allAttendees, events);
+        ArrayList<TimeRange> allAttendeeSlots = getPossibleSlots(allAttendeeEvents, allAttendees, duration);
+
+        if (mandatoryAttendees.size() == 0) {
+            return allAttendeeSlots;
+        }
+        else if (mandatoryAttendeesSlots.size() == 0 ) {
+            return allAttendeeSlots;
+        }
+        else {
+            return mandatoryAttendeesSlots;
+        }
     }
-    else if (duration > TimeRange.WHOLE_DAY.duration()) {
-        return slots;
-    }
-    else {
-        int eventTimeStart = TimeRange.START_OF_DAY;
-        int eventTimeEnd = TimeRange.START_OF_DAY;
-        int latestEventEnd = TimeRange.START_OF_DAY;
-        int start = TimeRange.START_OF_DAY;
-        int end = TimeRange.END_OF_DAY;
-        Boolean conflictingAttendees = false;
 
-
+    public Collection<Event> getEventsForAttendees(Collection<String> attendees, Collection<Event> events) {
+        ArrayList<Event> filteredEvents = new ArrayList<>();;
         for (Event event : events) {
-            eventTimeStart = event.getWhen().start();
-            eventTimeEnd = event.getWhen().end();
             Set<String> eventAttendees = event.getAttendees();
-            conflictingAttendees = false;
             for (String attendee : attendees) {
                 if (eventAttendees.contains(attendee)) {
-                    conflictingAttendees = true;
-                    break;
+                    filteredEvents.add(event);
                 }
             }
-            if (conflictingAttendees == false) {
-                continue;
-            }
-            else if (start == eventTimeStart && end == eventTimeEnd) {
-                return slots;
-            }
-            else if (eventTimeStart == start && eventTimeEnd < end) {
-                start = eventTimeEnd;
-            }
-            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd >= end) {
-                slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
-                return slots;
-            }
-            else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd < end) {
-                slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
-                start = eventTimeEnd;
-            }
-            latestEventEnd = Math.max(latestEventEnd, eventTimeEnd);
+        }
+        return filteredEvents;
+    }
 
+    public ArrayList<TimeRange> getPossibleSlots(Collection<Event> events, Collection<String> attendees, long duration) {
+        ArrayList<TimeRange> slots = new ArrayList<TimeRange>();
+        int attendeeNumber = attendees.size();
+
+        if (attendeeNumber == 0) {
+            slots.add(TimeRange.WHOLE_DAY);
+            return slots;
         }
-        if (end - latestEventEnd >= duration && conflictingAttendees == true) {
-            slots.add(TimeRange.fromStartEnd(latestEventEnd, end, true));
+        else if (duration > TimeRange.WHOLE_DAY.duration()) {
+            return slots;
         }
-        else if (end - latestEventEnd >= duration && conflictingAttendees == false) {
-            slots.add(TimeRange.fromStartEnd(start, end, true));
+        else {
+            int eventTimeStart = TimeRange.START_OF_DAY;
+            int eventTimeEnd = TimeRange.START_OF_DAY;
+            int latestEventEnd = TimeRange.START_OF_DAY;
+            int start = TimeRange.START_OF_DAY;
+            int end = TimeRange.END_OF_DAY;
+
+            for (Event event : events) {
+                eventTimeStart = event.getWhen().start();
+                eventTimeEnd = event.getWhen().end();
+                Set<String> eventAttendees = event.getAttendees();
+                if (start == eventTimeStart && end == eventTimeEnd) {
+                    return slots;
+                }
+                else if (eventTimeStart == start && eventTimeEnd < end) {
+                    start = eventTimeEnd;
+                }
+                else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd >= end) {
+                    slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
+                    return slots;
+                }
+                else if (eventTimeStart > start && eventTimeStart - start >= duration && eventTimeEnd < end) {
+                    slots.add(TimeRange.fromStartEnd(start, eventTimeStart, false));
+                    start = eventTimeEnd;
+                }
+                latestEventEnd = Math.max(latestEventEnd, eventTimeEnd);
+
+            }
+            if (end - latestEventEnd >= duration) {
+                slots.add(TimeRange.fromStartEnd(latestEventEnd, end, true));
+            }
+
+            return slots;
         }
-        return slots;
     }
-    }
+
+    
 }
