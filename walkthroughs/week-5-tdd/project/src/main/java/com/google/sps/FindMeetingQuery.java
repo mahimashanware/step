@@ -33,14 +33,10 @@ public final class FindMeetingQuery {
         Collection<Event> allAttendeeEvents = getEventsForAttendees(allAttendees, events);
         ArrayList<TimeRange> allAttendeeSlots = getPossibleSlots(allAttendeeEvents, allAttendees, duration);
 
-        System.out.println(mandatoryAttendeesSlots);
-        System.out.println(allAttendeeSlots);
-        if (allAttendeeSlots.size() == 0) {
-            System.out.println("mandatorySlots");
+        if (allAttendeeSlots.size() == 0 && mandatoryAttendees.size() != 0) {
             return mandatoryAttendeesSlots;
         }
         else {
-            System.out.println("allSlots");
             return allAttendeeSlots;
         }
 
