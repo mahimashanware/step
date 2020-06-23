@@ -60,7 +60,7 @@ public final class MeetingRequest {
    * Adds one optional attendee for the meeting.
    */
   public void addOptionalAttendee(String attendee) {
-    if (!attendees.contains(attendee)) {
+    if (!all_attendees.contains(attendee)) {
       optional_attendees.add(attendee);
       all_attendees.add(attendee);
     }

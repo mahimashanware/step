@@ -33,15 +33,17 @@ public final class FindMeetingQuery {
         Collection<Event> allAttendeeEvents = getEventsForAttendees(allAttendees, events);
         ArrayList<TimeRange> allAttendeeSlots = getPossibleSlots(allAttendeeEvents, allAttendees, duration);
 
-        if (mandatoryAttendees.size() == 0) {
-            return allAttendeeSlots;
-        }
-        else if (mandatoryAttendeesSlots.size() == 0 ) {
-            return allAttendeeSlots;
-        }
-        else {
+        System.out.println(mandatoryAttendeesSlots);
+        System.out.println(allAttendeeSlots);
+        if (allAttendeeSlots.size() == 0) {
+            System.out.println("mandatorySlots");
             return mandatoryAttendeesSlots;
         }
+        else {
+            System.out.println("allSlots");
+            return allAttendeeSlots;
+        }
+
     }
 
     public Collection<Event> getEventsForAttendees(Collection<String> attendees, Collection<Event> events) {
@@ -51,6 +53,7 @@ public final class FindMeetingQuery {
             for (String attendee : attendees) {
                 if (eventAttendees.contains(attendee)) {
                     filteredEvents.add(event);
+                    break;
                 }
             }
         }
@@ -76,6 +79,9 @@ public final class FindMeetingQuery {
             int end = TimeRange.END_OF_DAY;
 
             for (Event event : events) {
+                if (event.getWhen() == TimeRange.WHOLE_DAY) {
+                    return new ArrayList<TimeRange>();
+                }
                 eventTimeStart = event.getWhen().start();
                 eventTimeEnd = event.getWhen().end();
                 Set<String> eventAttendees = event.getAttendees();
