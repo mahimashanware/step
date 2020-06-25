@@ -32,7 +32,7 @@ public final class GreeterTest {
   }
 
   @Test
-public void testGreetingTrimsWhitespace() {
+public void greetingTrimsWhitespace() {
   Greeter greeter = new Greeter();
 
   String greeting = greeter.greet("   Ada   ".trim());
